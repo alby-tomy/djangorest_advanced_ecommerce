@@ -1,0 +1,26 @@
+products = [
+    {
+        "_id":1,
+        "product":"Camera",
+        "category":"electronics",
+        "price":50000
+    },
+    {
+        "_id":2,
+        "product":"Laptop",
+        "category":"electronics",
+        "price":75000
+    },
+    {
+        "_id":3,
+        "product":"Smartphone",
+        "category":"electronics",
+        "price":25000
+    },
+    {
+        "_id":4,
+        "product":"Tab",
+        "category":"electronics",
+        "price":15000
+    }
+]
