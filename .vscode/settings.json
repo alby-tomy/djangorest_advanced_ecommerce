@@ -1,0 +1,6 @@
+{
+    "editor.tabCompletion": "off",
+    "window.density.editorTabHeight": "default",
+    "editor.stickyTabStops": false,
+    "emmet.triggerExpansionOnTab": false
+}
