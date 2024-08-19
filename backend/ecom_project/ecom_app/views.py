@@ -13,7 +13,14 @@ def getRoutes(request):
     return Response("Hi")
 
 @api_view(['GET'])
-def getProduct(request):
+def getProducts(request):
     products = Products.objects.all()
     serializer = ProdcutSerializers(products, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def getProduct(request, pk):
+    product = Products.objects.get(_id=pk)
+    serializer = ProdcutSerializers(product, many=False)
     return Response(serializer.data)

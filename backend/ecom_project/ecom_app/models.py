@@ -14,8 +14,10 @@ class Products(models.Model):
     product_price = models.DecimalField(max_digits=7, decimal_places=2 ,null=True, blank=True)
     stock_count = models.IntegerField(null=True, blank=True, default=0)
     created_at = models.DateTimeField(auto_now_add=True)
+    numReviews = models.IntegerField(null=True, blank=True, default=0)
     _id = models.AutoField(primary_key=True, editable=False)
     
     
     def __str__(self):
         return self.product_name
+    
