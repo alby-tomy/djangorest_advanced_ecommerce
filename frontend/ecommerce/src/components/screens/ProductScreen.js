@@ -67,7 +67,7 @@ function ProductScreen({ params }) {
               </ListGroup.Item>
             </ListGroup>
             <br />
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0px 10px 20px 10px' }}>
               <strong>
                 {product.stock_count > 0
                   ? `${product.stock_count} In Stock`
