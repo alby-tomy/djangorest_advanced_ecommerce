@@ -1,27 +1,36 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect} from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { Row, Col, Image, ListGroup, Button, Container, Card } from 'react-bootstrap'
-import axios from "axios"
 import Rating from "../Rating"
+import { productDetailsAction } from '../../actions/productActions'
+import { useDispatch, useSelector } from 'react-redux'
+import Loader from '../Loader'
+import Message from '../Message'
+
 
 
 function ProductScreen({ params }) {
   const { id } = useParams()
-  const [product, setProduct] = useState([]);
+  const dispatch = useDispatch()
+  const productDetails = useSelector((state) => state.productDetails)
+  const { error, loading, product } = productDetails
+
   useEffect(() => {
-    async function fetchproduct() {
-      const { data } = await axios.get(`/api/product/${id}`)
-      setProduct(data)
-    }
-    fetchproduct()
-  }, []);
+    dispatch(productDetailsAction(id))
+  }, [dispatch,params]);
+
   return (
     <Container>
       <div>
         <Link to={'/'} className='btn btn-dark my-3'>Go Back
         </Link>
 
-        <Row style={{ border: '3px solid black', borderRadius: '10px' }}>
+        {loading?(
+          <Loader/>
+        ): error?(
+          (<Message variant='danger'>{error}</Message>)
+        ):(
+          <Row style={{ border: '3px solid black', borderRadius: '10px' }}>
           <Col xs={12} md={6} style={{ padding: '5%' }}>
             <div style={{
               width: '100%',
@@ -85,6 +94,7 @@ function ProductScreen({ params }) {
 
           </Col>
         </Row>
+        )}
 
 
 
