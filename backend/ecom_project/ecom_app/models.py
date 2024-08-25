@@ -21,3 +21,7 @@ class Products(models.Model):
     def __str__(self):
         return self.product_name
     
+
+class Category(models.Model):
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    

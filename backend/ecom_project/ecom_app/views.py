@@ -40,7 +40,7 @@ def getUserProfiles(request):
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
     
-    
+
 
 @api_view(['GET'])
 @permission_classes([IsAdminUser])
