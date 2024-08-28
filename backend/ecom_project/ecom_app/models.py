@@ -22,6 +22,6 @@ class Products(models.Model):
         return self.product_name
     
 
-class Category(models.Model):
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    
+# class Category(models.Model):
+#     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+      

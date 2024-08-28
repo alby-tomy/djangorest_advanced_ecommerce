@@ -5,20 +5,20 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 
-class ProdcutSerializers(serializers.ModelSerializer):
+class ProdcutSerializer(serializers.ModelSerializer):
     class Meta:
         model = Products
         fields = '__all__'
         
 
 class UserSerializer(serializers.ModelSerializer):
-    name = serializers.SerializerMethodField(read_only = True)
-    _id = serializers.SerializerMethodField(read_only = True)
-    isAdmin = serializers.SerializerMethodField(read_only = True)
-    
+    name=serializers.SerializerMethodField(read_only=True)
+    _id=serializers.SerializerMethodField(read_only=True)
+    isAdmin=serializers.SerializerMethodField(read_only=True)
+   
     class Meta:
-        model = User
-        fields = ['id','_id','username','email','name','isAdmin']
+        model=User
+        fields=['id','_id','username','email','name','isAdmin']
         
     def get_name(self, obj):
         first_name = obj.first_name
@@ -28,18 +28,18 @@ class UserSerializer(serializers.ModelSerializer):
             name = obj.username
         return name
     
-    def get__id(self, obj):
+    def get__id(self,obj):
         return obj.id
-    
-    def get_isAdmin(self, obj):
+
+    def get_isAdmin(self,obj):
         return obj.is_staff
                 
 
-class UserSeralizerWithToken(serializers.ModelSerializer):
+class UserSeralizerWithToken(UserSerializer):
     token = serializers.SerializerMethodField(read_only = True)
     class Meta:
-        model = User
-        fields = ['id','_id','username','email','name','isAdmin', 'token']
+        model = User    
+        fields = ['id','_id','username','email','name','isAdmin','token']
         
     def get_token(self, obj):
         token = RefreshToken.for_user(obj)
