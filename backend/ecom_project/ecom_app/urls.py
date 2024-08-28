@@ -3,7 +3,7 @@ from .views import getRoutes, getProduct, getProducts, getUserProfiles, MyTokenO
 from rest_framework_simplejwt.views import (
     TokenObtainPairView 
 )
-from .views import registerView
+from .views import registerView, ActivateAccountView
 
 
 urlpatterns = [
@@ -14,4 +14,5 @@ urlpatterns = [
     path('user/profile/', getUserProfiles, name="get-user-profile"),
     path('user/details/', getUserView, name="get-user-details"),
     path('user/registration/',registerView, name="registration"),
+    path('activate/<uidb64>/<token>',ActivateAccountView.as_view(), name='activate')
 ]
