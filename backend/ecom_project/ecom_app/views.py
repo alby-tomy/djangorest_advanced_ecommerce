@@ -53,14 +53,12 @@ class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
     
 
-
 @api_view(['GET'])
 @permission_classes([IsAdminUser])
 def getUserView(request):
     user = User.objects.all()
     serializer = UserSerializer(user, many=True)
     return Response(serializer.data)
-
 
 
 @api_view(['POST'])
