@@ -47,7 +47,7 @@ function Header() {
                     <Nav.Link className="dropdown-item">Login</Nav.Link>
                   </LinkContainer>
 
-                  <LinkContainer to="signup">
+                  <LinkContainer to="/signup">
                     <Nav.Link className="dropdown-item">SignUp</Nav.Link>
                   </LinkContainer>
 

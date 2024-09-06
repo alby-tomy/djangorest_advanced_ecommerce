@@ -4,22 +4,52 @@ import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux"
 import Loader from '../Loader'
 import Message from '../Message'
+import { validEmail, validPassword } from './Regex'
 
 
 
 
 function SignupScreen() {
+  const navigate = useNavigate()
   const [fname, setFname] = useState("")
   const [lname, setLname] = useState("")
   const [email, setEmail] = useState("")
   const [pass1, setPass1] = useState("")
   const [pass2, setPass2] = useState("")
   const [error, setError] = useState("")
+  const [show, changeshow] = useState("fa fa-eye-slash")
 
   const submitHandler = (e) => {
     e.preventDefault()
-    console.log(fname,lname,email,pass1,pass2)
 
+    if(pass1 != pass2){
+      setError("Password Do not match")
+      navigate("/signup")
+    }
+
+    else if(!validPassword.test(pass1)){
+      setError("Invalid Criteria does not match")
+    }
+
+    else{
+      setError('Signup success')
+    }
+
+  }
+
+
+  const showPassword = ()=>{
+    var x = document.getElementById("pass1")
+    var z = document.getElementById("pass2")
+    if(x.type === "password" && z.type === "password"){
+      x.type = "text"
+      z.type = "text"
+      changeshow('fa fa-eye');
+    }else{
+      x.type = "password"
+      z.type = "password"
+      changeshow('fa fa-eye-slash');
+    }
   }
   return (
     <Container className='mt-3'>
@@ -31,7 +61,7 @@ function SignupScreen() {
               Signup
             </Card.Header>
             <Card.Body>
-            <Message variant='danger'>{error}</Message>
+              {error && <Message variant='danger'>{error}</Message>}
               <Form onSubmit={submitHandler }>
                 <Form.Group className="mb-3" controlId="fname">
                   <Form.Label><span><i className='fa fa-user'></i></span> First Name</Form.Label>
@@ -61,13 +91,14 @@ function SignupScreen() {
                     onChange={(e) => setEmail(e.target.value)} />
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId="pass1">
-                  <Form.Label><span><i className=''></i></span> Password</Form.Label>
+                <Form.Group className="mb-3" >
+                  <Form.Label><span><i className={show}></i></span>{" "} Password</Form.Label>
                   <InputGroup className='mb-3'>
-                    <InputGroup.Checkbox />
+                    <InputGroup.Checkbox onClick={showPassword}/>
                     {" "}
                     <Form.Control
                       placeholder='Create a password'
+                      id="pass1"
                       required type='password'
                       value={pass1}
                       onChange={(e) => setPass1(e.target.value)}
@@ -76,13 +107,14 @@ function SignupScreen() {
                   <small>Password must incude atlest [1-9][a-z][A-Z][_$@81..] & 8 Characters</small>
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId="pass2">
-                  <Form.Label><span><i className=''></i></span>Confirm Password</Form.Label>
+                <Form.Group className="mb-3" >
+                  <Form.Label><span><i className={show}></i></span>{" "}Confirm Password</Form.Label>
                   <InputGroup className='mb-3'>
-                    <InputGroup.Checkbox />
+                    <InputGroup.Checkbox onClick={showPassword}/>
                     {" "}
                     <Form.Control
                       placeholder='Confirm your password'
+                      id="pass2"
                       required type='password'
                       value={pass2}
                       onChange={(e) => setPass2(e.target.value)}
